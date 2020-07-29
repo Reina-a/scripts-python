@@ -44,6 +44,8 @@ if not args.disable_rename:
 else:
     print("- rename:\tdisabled")
 
+tar_img_wsl_path_base = tar_img_wsl_path
+jek_img_url_base = jek_img_url
 
 # 循环输入图片路径
 while True:
@@ -52,7 +54,7 @@ while True:
     # 程序出口
     if src_img_win_path == 'quit':
         break
-
+    
     # 将得到的windows路径转化为相应的wsl路径
     src_img_wsl_path, filename = pc.abs_win2wsl(src_img_win_path, pc.FILE_MODE)
 
@@ -70,14 +72,16 @@ while True:
         print("")
         continue
 
+        
+
     # 为路径补充文件名
     if args.disable_rename:
-        tar_img_wsl_path += filename
-        jek_img_url += filename
+        tar_img_wsl_path = tar_img_wsl_path_base + filename
+        jek_img_url =  jek_img_url_base + filename
     else:
         new_filename = input("New filename: ")
-        tar_img_wsl_path += new_filename    
-        jek_img_url += new_filename
+        tar_img_wsl_path = tar_img_wsl_path_base + new_filename    
+        jek_img_url = jek_img_url_base + new_filename
     
     # 打印jekyll所需的路径
     print(jek_img_url)
